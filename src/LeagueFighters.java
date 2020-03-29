@@ -23,7 +23,8 @@ public class LeagueFighters {
 		leagueFightersJFrame.setSize(WIDTH, HEIGHT);
 		leagueFightersJFrame.setVisible(true);
 		leagueFightersJFrame.add(GP);
-		
+		leagueFightersJFrame.addKeyListener(GP);
+		leagueFightersJFrame.pack();
 		leagueFightersJFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}

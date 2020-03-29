@@ -2,10 +2,11 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JPanel;
 
-public class GamePanel1 extends JPanel{
+public class GamePanel1 extends JPanel implements KeyListener{
 	
     final int MENU = 0;
     final int GAME = 1;
@@ -23,6 +24,7 @@ public class GamePanel1 extends JPanel{
     
 	@Override
 	public void paintComponent(Graphics g){
+		System.out.println(currentState);
 		if(currentState == MENU){
 		    drawMenuState(g);
 		}else if(currentState == GAME){
@@ -62,16 +64,31 @@ public class GamePanel1 extends JPanel{
 	 void updateEndState()  { 
 		 
 	 }
-	 
+	 @Override
 	 public void keyPressed(KeyEvent e) {
 		 if (e.getKeyCode()==KeyEvent.VK_ENTER) {
-			 if(currentState!=2) {
+			 if(currentState==MENU) {
 				 currentState++;
 			 }
-			 else {
+			 else if(currentState==GAME) {
+				 currentState++;
+			 }
+			 else if(currentState==END) {
 				 currentState=0;
 			 }
 		 }
 	 }
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
