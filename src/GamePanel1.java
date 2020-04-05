@@ -1,12 +1,16 @@
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
-public class GamePanel1 extends JPanel implements KeyListener{
+public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 	
     final int MENU = 0;
     final int GAME = 1;
@@ -16,10 +20,15 @@ public class GamePanel1 extends JPanel implements KeyListener{
     
     Font titleFont;
     Font normalFont;
+    
+    Timer frameDraw;
   
     GamePanel1(){
 	    titleFont = new Font("Impact", Font.PLAIN, 48);
 	    normalFont = new Font("Arial", Font.PLAIN, 18);
+	    
+	    frameDraw = new Timer(1000/60,this);
+	    frameDraw.start();
     }
     
 	@Override
@@ -66,6 +75,7 @@ public class GamePanel1 extends JPanel implements KeyListener{
 	 }
 	 @Override
 	 public void keyPressed(KeyEvent e) {
+		 
 		 if (e.getKeyCode()==KeyEvent.VK_ENTER) {
 			 if(currentState==MENU) {
 				 currentState++;
@@ -75,6 +85,11 @@ public class GamePanel1 extends JPanel implements KeyListener{
 			 }
 			 else if(currentState==END) {
 				 currentState=0;
+			 }
+		 }
+		 if (e.getKeyCode()==KeyEvent.VK_SPACE) {
+			 if(currentState==MENU) {
+				 JOptionPane.showMessageDialog(null, "League Fighters is a two player fighting game. \n Each player chooses a fishter at the start to battle with. \n The first person to get their enemies health down to zero wins");
 			 }
 		 }
 	 }
@@ -89,6 +104,12 @@ public class GamePanel1 extends JPanel implements KeyListener{
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		repaint();
 	}
 	
 }

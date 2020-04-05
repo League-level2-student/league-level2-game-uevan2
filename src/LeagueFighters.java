@@ -4,8 +4,7 @@ public class LeagueFighters {
 	
 	JFrame leagueFightersJFrame;
 	GamePanel1 GP = new GamePanel1();
-	
-	public static final int WIDTH = 1600;
+	public static final int WIDTH = 1500;
 	public static final int HEIGHT = 800;
 	
 	LeagueFighters(){
@@ -24,7 +23,6 @@ public class LeagueFighters {
 		leagueFightersJFrame.setVisible(true);
 		leagueFightersJFrame.add(GP);
 		leagueFightersJFrame.addKeyListener(GP);
-		leagueFightersJFrame.pack();
 		leagueFightersJFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}
