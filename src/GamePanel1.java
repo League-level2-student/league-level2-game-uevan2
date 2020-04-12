@@ -18,6 +18,8 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
     
     int currentState = MENU;
     
+    Fighters f = new Fighters(200, 200, 300, 700, 10);
+    
     Font titleFont;
     Font normalFont;
     
@@ -33,7 +35,6 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
     
 	@Override
 	public void paintComponent(Graphics g){
-		System.out.println(currentState);
 		if(currentState == MENU){
 		    drawMenuState(g);
 		}else if(currentState == GAME){
@@ -58,6 +59,7 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 	 void drawGameState(Graphics g) { 
 		 g.setColor(Color.WHITE);
 		 g.fillRect(0, 0, LeagueFighters.WIDTH, LeagueFighters.HEIGHT);
+		 f.draw(g);
 	 }
 	 void drawEndState(Graphics g)  { 
 		 g.setColor(Color.RED);
@@ -68,14 +70,13 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 		 
 	 }
 	 void updateGameState() { 
-		 
+		 f.update();
 	 }
 	 void updateEndState()  { 
 		 
 	 }
 	 @Override
 	 public void keyPressed(KeyEvent e) {
-		 
 		 if (e.getKeyCode()==KeyEvent.VK_ENTER) {
 			 if(currentState==MENU) {
 				 currentState++;
@@ -87,9 +88,25 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 				 currentState=0;
 			 }
 		 }
+		 
 		 if (e.getKeyCode()==KeyEvent.VK_SPACE) {
 			 if(currentState==MENU) {
 				 JOptionPane.showMessageDialog(null, "League Fighters is a two player fighting game. \n Each player chooses a fishter at the start to battle with. \n The first person to get their enemies health down to zero wins");
+			 }
+		 }
+	
+		 if(currentState==GAME) {
+			 
+			 if (e.getKeyCode()==KeyEvent.VK_LEFT) {
+				 if(f.xPos>0) {
+					 f.left();
+				 }
+			 }
+
+			 if (e.getKeyCode()==KeyEvent.VK_RIGHT) {
+				 if(f.xPos<1500) {
+					 f.right();
+				 }
 			 }
 		 }
 	 }
@@ -109,6 +126,13 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		if(currentState == MENU){
+		    updateMenuState();
+		}else if(currentState == GAME){
+		    updateGameState();
+		}else if(currentState == END){
+		    updateEndState();
+		}
 		repaint();
 	}
 	
