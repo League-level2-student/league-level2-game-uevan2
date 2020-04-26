@@ -11,7 +11,7 @@ public class Fighters {
 	int yPos = 300;
 	int width;
 	int height;
-	int speed = 0;
+	int speed = 10;
 	int health;
 	Rectangle collisionBox;
 	
@@ -28,7 +28,7 @@ public class Fighters {
 		
 		if (needImage) {
 		    loadImage ("Fighter.jpg");
-		}
+		}	
 	}
 	
 	void loadImage(String imageFile) {
