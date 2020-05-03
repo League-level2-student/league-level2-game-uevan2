@@ -26,7 +26,9 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
     
     int direction = STILL;
     
-    Fighters f = new Fighters(200, 200, 300, 700, 10);
+    Fighters T1 = new Fighters(200, 200, 300, 700, 10);
+    
+    Fighters Yassuo = new Fighters(200, 200, 300, 500, 10);
     
     Font titleFont;
     Font normalFont;
@@ -69,26 +71,34 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 		 g.fillRect(0, 0, LeagueFighters.WIDTH, LeagueFighters.HEIGHT);
 		 
 		 if(whatImage==0) {
-			 f.draw(g);
+			 T1.draw(g);
 		 }
 		 
 		 if(whatImage==1) {
 			 Fighters.needImage = true;
-			 f.loadImage("T1 Fighting.jpg");
-			 f.draw(g);
+			 Fighters.gotImage=false;
+			 T1.loadImage("T1 Fighting.jpg");
+			 T1.draw(g);
 		 }
 		 
 	 }
 	 void drawEndState(Graphics g)  { 
 		 g.setColor(Color.RED);
 		 g.fillRect(0, 0, LeagueFighters.WIDTH, LeagueFighters.HEIGHT);
+		 
+		 g.setColor(Color.WHITE);
+		 g.setFont(titleFont);
+		 g.drawString("Game Over", 700, 200);
+		 
+		 g.setFont(normalFont);
+		 g.drawString("_____ Won", 750, 350);
 	 }
 	
 	 void updateMenuState() { 
 		 
 	 }
 	 void updateGameState() { 
-		 f.update();
+		 T1.update();
 		 
 		 
 		 if(direction==STILL) {
@@ -131,15 +141,15 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 		 if(currentState==GAME) {
 			 
 			 if (e.getKeyCode()==KeyEvent.VK_LEFT) {
-				 if(f.xPos>0) {
-					 f.left();
+				 if(T1.xPos>0) {
+					 T1.left();
 					 direction=LEFT;
 				 }
 			 }
 
 			 if (e.getKeyCode()==KeyEvent.VK_RIGHT) {
-				 if(f.xPos<1500-f.width) {
-					 f.right();
+				 if(T1.xPos<1500-T1.width) {
+					 T1.right();
 					 direction=RIGHT;
 				 }
 			 }
