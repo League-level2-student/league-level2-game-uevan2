@@ -26,7 +26,10 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
     
     int direction = STILL;
     
-    Fighters T1 = new Fighters(200, 200, 300, 700, 10);
+    int fWidth = 200;
+    int fHeight = 200;
+    
+    Fighters T1 = new Fighters(200, 200, fWidth, fHeight, 10);
     
     Fighters Yassuo = new Fighters(200, 200, 300, 500, 10);
     
@@ -77,10 +80,29 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 		 if(whatImage==1) {
 			 Fighters.needImage = true;
 			 Fighters.gotImage=false;
-			 T1.loadImage("T1 Fighting.jpg");
+			 T1.loadImage("Untitled2.1.png");
+			 T1.width=fWidth;
+			 T1.height=fHeight;
 			 T1.draw(g);
 		 }
 		 
+		 if(whatImage==2) {
+			 Fighters.needImage = true;
+			 Fighters.gotImage=false;
+			 T1.loadImage("T1 Fighting.png");
+			 T1.width=fWidth;
+			 T1.height=fHeight;
+			 T1.draw(g);
+		 }
+		 
+		 if(whatImage==3) {
+			 Fighters.needImage = true;
+			 Fighters.gotImage=false;
+			 T1.loadImage("Fighter.jpg");
+			 T1.width=fWidth;
+			 T1.height=fHeight;
+			 T1.draw(g);
+		 }
 	 }
 	 void drawEndState(Graphics g)  { 
 		 g.setColor(Color.RED);
@@ -97,22 +119,22 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 	 void updateMenuState() { 
 		 
 	 }
+	 
 	 void updateGameState() { 
 		 T1.update();
 		 
 		 
 		 if(direction==STILL) {
-			 
+			 whatImage = 3;
 		 }
 		 
 		 if(direction==LEFT) {
-			 System.out.println("moving left");
 			 
 			 whatImage = 1;
 		 }
 		 
 		 if(direction==RIGHT) {
-			 
+			 whatImage = 2;
 		 }
 	 }
 	 void updateEndState()  { 
@@ -153,6 +175,12 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 					 direction=RIGHT;
 				 }
 			 }
+			 
+			 if (e.getKeyCode()==KeyEvent.VK_SPACE) {
+				 if(T1.yPos>=300) {
+					 T1.jump();
+				 }
+			 }
 		 }
 	 }
 
@@ -165,7 +193,7 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		if (e.getKeyCode()==KeyEvent.VK_RIGHT) {
+		if (e.getKeyCode()==KeyEvent.VK_LEFT) {
 			direction=STILL;
 		}
 		

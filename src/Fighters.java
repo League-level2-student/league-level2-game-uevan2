@@ -64,4 +64,11 @@ public class Fighters {
 		xPos+=speed;
 	}
 	
+	void jump() {
+		for(int velocity = 20; velocity >= -20; velocity--) {
+			yPos=yPos-velocity;
+			System.out.println(yPos);
+		}
+	}
+	
 }
