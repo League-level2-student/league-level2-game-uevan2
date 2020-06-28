@@ -16,27 +16,38 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
     final int GAME = 1;
     final int END = 2;
     
-    final int STILL = 0;
-    final int LEFT = 1;
-    final int RIGHT= 2;
-    
     int whatImage = 0;
+    int whatImage1 = 0;
     
     int currentState = MENU;
     
-    int direction = STILL;
-    
     int fWidth = 200;
     int fHeight = 200;
+    int fWidth1 = 200;
+    int fHeight1 = 200;
+    
+    final int STILL = 0;
+    final int LEFT = 1;
+    final int RIGHT = 2;
+    
+    final int STILL1 = 0;
+    final int LEFT1 = 1;
+    final int RIGHT1 = 2;
     
     Fighters T1 = new Fighters(200, 200, fWidth, fHeight, 10);
     
-    Fighters Yassuo = new Fighters(200, 200, 300, 500, 10);
+    Fighters Yassuo = new Fighters(600, 200, fWidth1, fHeight1, 10);
     
     Font titleFont;
     Font normalFont;
     
     Timer frameDraw;
+    
+    Boolean ifJump = false;
+    Boolean ifJump1 = false;
+    
+    int velocity = 20;
+    int velocity1 = 20;
   
     GamePanel1(){
 	    titleFont = new Font("Impact", Font.PLAIN, 48);
@@ -103,7 +114,27 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 			 T1.height=fHeight;
 			 T1.draw(g);
 		 }
+			
+		 if(whatImage1==1) {
+			 Fighters.needImage = true;
+			 Fighters.gotImage = false;
+			 Yassuo.loadImage("Yassuo Still.png");
+			 Yassuo.width=fWidth1;
+			 Yassuo.height=fHeight1;
+			 Yassuo.draw(g);
+		 }
+		 
+		 if(ifJump == true) {
+			 //T1.jump(g);
+			 T1.jump(g, velocity);
+			 velocity=velocity-2;
+			 if(velocity<-20) {
+				 ifJump=false;
+				 velocity=20;
+			 }
+		 }
 	 }
+	 
 	 void drawEndState(Graphics g)  { 
 		 g.setColor(Color.RED);
 		 g.fillRect(0, 0, LeagueFighters.WIDTH, LeagueFighters.HEIGHT);
@@ -123,18 +154,28 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 	 void updateGameState() { 
 		 T1.update();
 		 
-		 
-		 if(direction==STILL) {
+		 if(T1.direction==STILL) {
 			 whatImage = 3;
 		 }
 		 
-		 if(direction==LEFT) {
-			 
+		 if(T1.direction==LEFT) {
 			 whatImage = 1;
 		 }
 		 
-		 if(direction==RIGHT) {
+		 if(T1.direction==RIGHT) {
 			 whatImage = 2;
+		 }
+		 
+		 if(Yassuo.direction==STILL1) {
+			 whatImage1 = 1;
+		 }
+		 
+		 if(Yassuo.direction==RIGHT1) {
+			 whatImage1 = 2;
+		 }
+		 
+		 if(Yassuo.direction==LEFT1) {
+			 whatImage1 = 3;
 		 }
 	 }
 	 void updateEndState()  { 
@@ -165,20 +206,20 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 			 if (e.getKeyCode()==KeyEvent.VK_LEFT) {
 				 if(T1.xPos>0) {
 					 T1.left();
-					 direction=LEFT;
+					 T1.direction=LEFT;
 				 }
 			 }
 
 			 if (e.getKeyCode()==KeyEvent.VK_RIGHT) {
 				 if(T1.xPos<1500-T1.width) {
 					 T1.right();
-					 direction=RIGHT;
+					 T1.direction=RIGHT;
 				 }
 			 }
 			 
-			 if (e.getKeyCode()==KeyEvent.VK_SPACE) {
-				 if(T1.yPos>=300) {
-					 T1.jump();
+			 if (e.getKeyCode()==KeyEvent.VK_UP) {
+				 if(T1.yPos>=0) {
+					 ifJump = true;
 				 }
 			 }
 		 }
@@ -194,11 +235,11 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getKeyCode()==KeyEvent.VK_LEFT) {
-			direction=STILL;
+			T1.direction=STILL;
 		}
 		
 		if (e.getKeyCode()==KeyEvent.VK_RIGHT) {
-			direction=STILL;
+			T1.direction=STILL;
 		}
 	}
 
@@ -213,6 +254,5 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 		    updateEndState();
 		}
 		repaint();
-	}
-	
+	}	
 }

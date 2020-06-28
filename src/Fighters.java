@@ -14,6 +14,12 @@ public class Fighters {
 	int speed = 10;
 	int health;
 	Rectangle collisionBox;
+    
+	final int STILL = 0;
+    final int LEFT = 1;
+    final int RIGHT= 2;
+    
+    int direction = STILL;
 	
 	public static BufferedImage image;
 	public static boolean needImage = true;
@@ -64,10 +70,17 @@ public class Fighters {
 		xPos+=speed;
 	}
 	
-	void jump() {
-		for(int velocity = 20; velocity >= -20; velocity--) {
-			yPos=yPos-velocity;
-			System.out.println(yPos);
+	void jump(Graphics g, int velocity) {
+		yPos=yPos-velocity;
+		draw(g);
+	}
+	
+	void punch() {
+		if(direction == LEFT) {
+			
+		}
+		if(direction==RIGHT) {
+			
 		}
 	}
 	
