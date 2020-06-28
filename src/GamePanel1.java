@@ -89,8 +89,8 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 		 }
 		 
 		 if(whatImage==1) {
-			 Fighters.needImage = true;
-			 Fighters.gotImage=false;
+			 T1.needImage = true;
+			 T1.gotImage=false;
 			 T1.loadImage("Untitled2.1.png");
 			 T1.width=fWidth;
 			 T1.height=fHeight;
@@ -98,8 +98,8 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 		 }
 		 
 		 if(whatImage==2) {
-			 Fighters.needImage = true;
-			 Fighters.gotImage=false;
+			 T1.needImage = true;
+			 T1.gotImage=false;
 			 T1.loadImage("T1 Fighting.png");
 			 T1.width=fWidth;
 			 T1.height=fHeight;
@@ -107,8 +107,8 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 		 }
 		 
 		 if(whatImage==3) {
-			 Fighters.needImage = true;
-			 Fighters.gotImage=false;
+			 T1.needImage = true;
+			 T1.gotImage=false;
 			 T1.loadImage("Fighter.jpg");
 			 T1.width=fWidth;
 			 T1.height=fHeight;
@@ -116,8 +116,8 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 		 }
 			
 		 if(whatImage1==1) {
-			 Fighters.needImage = true;
-			 Fighters.gotImage = false;
+			 Yassuo.needImage = true;
+			 Yassuo.gotImage = false;
 			 Yassuo.loadImage("Yassuo Still.png");
 			 Yassuo.width=fWidth1;
 			 Yassuo.height=fHeight1;
@@ -125,7 +125,6 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 		 }
 		 
 		 if(ifJump == true) {
-			 //T1.jump(g);
 			 T1.jump(g, velocity);
 			 velocity=velocity-2;
 			 if(velocity<-20) {

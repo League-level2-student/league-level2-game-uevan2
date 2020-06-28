@@ -21,9 +21,9 @@ public class Fighters {
     
     int direction = STILL;
 	
-	public static BufferedImage image;
-	public static boolean needImage = true;
-	public static boolean gotImage = false;	
+	public BufferedImage image;
+	public boolean needImage = true;
+	public boolean gotImage = false;	
 	
 	Fighters(int xPos, int width, int height, int health, int speed) {
 		this.xPos = xPos;
