@@ -46,8 +46,15 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
     Boolean ifJump = false;
     Boolean ifJump1 = false;
     
+	boolean knocked0 = false;
+	boolean knocked1 = false;
+	boolean knocked2 = false;
+	boolean knocked3 = false;
+    
     int velocity = 20;
     int velocity1 = 20;
+    int velocity2 = 0;
+    int velocity3 = 0;
   
     GamePanel1(){
 	    titleFont = new Font("Impact", Font.PLAIN, 48);
@@ -124,12 +131,39 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 			 Yassuo.draw(g);
 		 }
 		 
+		 if(whatImage1==2) {
+			 Yassuo.needImage = true;
+			 Yassuo.gotImage = false;
+			 Yassuo.loadImage("Yassuomoving2.png");
+			 Yassuo.width=fWidth1;
+			 Yassuo.height=fHeight1;
+			 Yassuo.draw(g);
+		 }
+		 
+		 if(whatImage1==3) {
+			 Yassuo.needImage = true;
+			 Yassuo.gotImage = false;
+			 Yassuo.loadImage("Yassuomoving.png");
+			 Yassuo.width=fWidth1;
+			 Yassuo.height=fHeight1;
+			 Yassuo.draw(g);
+		 }
+		 
 		 if(ifJump == true) {
 			 T1.jump(g, velocity);
 			 velocity=velocity-2;
 			 if(velocity<-20) {
 				 ifJump=false;
 				 velocity=20;
+			 }
+		 }
+		 
+		 if(ifJump1 == true) {
+			 Yassuo.jump(g, velocity1);
+			 velocity1=velocity1-2;
+			 if(velocity1<-20) {
+				 ifJump1=false;
+				 velocity1=20;
 			 }
 		 }
 	 }
@@ -221,6 +255,38 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 					 ifJump = true;
 				 }
 			 }
+			 
+			 if (e.getKeyCode()==KeyEvent.VK_W) {
+				 if(Yassuo.yPos>=0) {
+					 ifJump1 = true;
+				 }
+			 }
+			 
+			 if (e.getKeyCode()==KeyEvent.VK_A) {
+				 if(T1.yPos>=0) {
+					 Yassuo.left();
+					 Yassuo.direction=LEFT1;
+				 }
+			 }
+			 
+			 if (e.getKeyCode()==KeyEvent.VK_D) {
+				 if(T1.yPos>=0) {
+					 Yassuo.right();
+					 Yassuo.direction=RIGHT1;
+				 }
+			 }
+			 
+			 if (e.getKeyCode()==KeyEvent.VK_DOWN) {
+				 if(checkColision()==true) {
+					 punch("T1");
+				 }
+			 }
+			 
+			 if (e.getKeyCode()==KeyEvent.VK_SPACE) {
+				 if(checkColision()==true) {
+					 punch("Yassuo");
+				 }
+			 }
 		 }
 	 }
 
@@ -240,6 +306,14 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 		if (e.getKeyCode()==KeyEvent.VK_RIGHT) {
 			T1.direction=STILL;
 		}
+		
+		if (e.getKeyCode()==KeyEvent.VK_A) {
+			Yassuo.direction=STILL;
+		}
+		
+		if (e.getKeyCode()==KeyEvent.VK_D) {
+			Yassuo.direction=STILL;
+		}
 	}
 
 	@Override
@@ -253,5 +327,81 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 		    updateEndState();
 		}
 		repaint();
-	}	
+	}
+	
+	boolean checkColision() {
+		if(T1.xPos+T1.width>Yassuo.xPos&&Yassuo.xPos+Yassuo.width>T1.xPos) {
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+	}
+	
+	void punch(String fighter) {
+		if(fighter.equals("T1")) {
+			Yassuo.health=Yassuo.health-200;
+			System.out.println(Yassuo.health);
+			if(Yassuo.xPos<T1.xPos){
+				knockLeft(1);
+			}
+			else {
+				knockRight(1);
+			}
+		}
+		if(fighter.equals("Yassuo")) {
+			T1.health=T1.health-100;
+			System.out.println(T1.health);
+			if(T1.xPos<Yassuo.xPos){
+				knockLeft(0);
+			}
+			else {
+				knockRight(0);
+			}
+		}
+	}
+	
+	void knockLeft(int fighter, Graphics g) {
+		if(fighter == 0) {
+			knocked0=true;
+			velocity2 = -14;
+			if(knocked0 = true) {			
+				T1.knock(g, velocity2);
+				T1.xPos+=velocity2;
+			}
+			if(velocity2>=0) {
+				knocked0=false;
+			}
+		}
+		
+		if(fighter == 1) {
+			knocked1=true;
+			if(knocked1 = true) {
+				for(velocity3 = -14; velocity3 < 0; velocity3+=2) {
+					Yassuo.xPos+=velocity3;
+				}
+			}
+		}
+	}
+	
+	void knockRight(int fighter) {
+		if(fighter == 0) {
+			knocked2=true;
+			if(knocked2 = true) {
+				for(velocity2 = 14; velocity2 > 0; velocity2-=2) {
+					T1.xPos+=velocity2;
+				}
+			}
+		}
+		
+		if(fighter == 1) {
+			knocked3=true;
+			if(knocked3 = true) {
+				for(velocity3 = 14; velocity3 > 0; velocity3-=2) {
+					Yassuo.xPos+=velocity3;
+				}
+			}
+		}
+	}
 }

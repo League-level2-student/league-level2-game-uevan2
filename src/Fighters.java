@@ -75,13 +75,11 @@ public class Fighters {
 		draw(g);
 	}
 	
-	void punch() {
-		if(direction == LEFT) {
-			
-		}
-		if(direction==RIGHT) {
-			
-		}
+	void knock(Graphics g, int velocity) {
+		xPos=xPos-velocity;
+		draw(g);
 	}
+	
+
 	
 }
