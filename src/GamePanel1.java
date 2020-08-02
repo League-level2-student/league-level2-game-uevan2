@@ -124,6 +124,24 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 			 T1.height=fHeight;
 			 T1.draw(g);
 		 }
+		 
+		 if(whatImage==4) {
+			 T1.needImage = true;
+			 T1.gotImage=false;
+			 T1.loadImage("T1Punch2.png");
+			 T1.width=fWidth;
+			 T1.height=fHeight;
+			 T1.draw(g);
+		 }
+		 
+		 if(whatImage==5) {
+			 T1.needImage = true;
+			 T1.gotImage=false;
+			 T1.loadImage("T1Punch.png");
+			 T1.width=fWidth;
+			 T1.height=fHeight;
+			 T1.draw(g);
+		 }
 			
 		 if(whatImage1==1) {
 			 Yassuo.needImage = true;
@@ -152,6 +170,24 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 			 Yassuo.draw(g);
 		 }
 		 
+		 if(whatImage1==4) {
+			 T1.needImage = true;
+			 T1.gotImage=false;
+			 T1.loadImage("moePunch2.jpg");
+			 T1.width=fWidth;
+			 T1.height=fHeight;
+			 T1.draw(g);
+		 }
+		 
+		 if(whatImage==4) {
+			 T1.needImage = true;
+			 T1.gotImage=false;
+			 T1.loadImage("moePunch.jpg");
+			 T1.width=fWidth;
+			 T1.height=fHeight;
+			 T1.draw(g);
+		 }
+		 
 		 if(ifJump == true) {
 			 T1.jump(g, velocity);
 			 velocity=velocity-2;
@@ -170,12 +206,12 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 			 }
 		 }
 		 
-		 if(ifPunch0=true) {
+		 if(ifPunch0==true) {
 			 punch("T1", g);
 			 ifPunch0=false;
 		 }
 		 
-		 if(ifPunch1=true) {
+		 if(ifPunch1==true) {
 			 punch("Yassuo", g);
 			 ifPunch1=false;
 		 }
@@ -222,6 +258,14 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 		 
 		 if(Yassuo.direction==LEFT1) {
 			 whatImage1 = 3;
+		 }
+		 
+		 if(ifPunch0 == true&&T1.direction==LEFT) {
+			 whatImage = 4;
+		 }
+		 
+		 if(ifPunch0 = true&&T1.direction==RIGHT) {
+			 whatImage = 5;
 		 }
 		 
 		 
