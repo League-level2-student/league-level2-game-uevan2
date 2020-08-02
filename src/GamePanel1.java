@@ -55,6 +55,9 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
     int velocity1 = 20;
     int velocity2 = 0;
     int velocity3 = 0;
+    
+    boolean ifPunch0 = false;
+    boolean ifPunch1 = false;
   
     GamePanel1(){
 	    titleFont = new Font("Impact", Font.PLAIN, 48);
@@ -166,6 +169,16 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 				 velocity1=20;
 			 }
 		 }
+		 
+		 if(ifPunch0=true) {
+			 punch("T1", g);
+			 ifPunch0=false;
+		 }
+		 
+		 if(ifPunch1=true) {
+			 punch("Yassuo", g);
+			 ifPunch1=false;
+		 }
 	 }
 	 
 	 void drawEndState(Graphics g)  { 
@@ -210,6 +223,8 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 		 if(Yassuo.direction==LEFT1) {
 			 whatImage1 = 3;
 		 }
+		 
+		 
 	 }
 	 void updateEndState()  { 
 		 
@@ -278,13 +293,13 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 			 
 			 if (e.getKeyCode()==KeyEvent.VK_DOWN) {
 				 if(checkColision()==true) {
-					 punch("T1");
+					 ifPunch0 = true;
 				 }
 			 }
 			 
 			 if (e.getKeyCode()==KeyEvent.VK_SPACE) {
 				 if(checkColision()==true) {
-					 punch("Yassuo");
+					 ifPunch1 = true;
 				 }
 			 }
 		 }
@@ -339,25 +354,24 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 		
 	}
 	
-	void punch(String fighter) {
+	void punch(String fighter, Graphics g) {
 		if(fighter.equals("T1")) {
 			Yassuo.health=Yassuo.health-200;
-			System.out.println(Yassuo.health);
 			if(Yassuo.xPos<T1.xPos){
-				knockLeft(1);
+				knockLeft(1, g);
 			}
 			else {
-				knockRight(1);
+				knockRight(1, g);
 			}
 		}
+		
 		if(fighter.equals("Yassuo")) {
 			T1.health=T1.health-100;
-			System.out.println(T1.health);
 			if(T1.xPos<Yassuo.xPos){
-				knockLeft(0);
+				knockLeft(0, g);
 			}
 			else {
-				knockRight(0);
+				knockRight(0, g);
 			}
 		}
 	}
@@ -365,10 +379,9 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 	void knockLeft(int fighter, Graphics g) {
 		if(fighter == 0) {
 			knocked0=true;
-			velocity2 = -14;
 			if(knocked0 = true) {			
 				T1.knock(g, velocity2);
-				T1.xPos+=velocity2;
+				T1.xPos-=velocity2;
 			}
 			if(velocity2>=0) {
 				knocked0=false;
@@ -378,29 +391,35 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 		if(fighter == 1) {
 			knocked1=true;
 			if(knocked1 = true) {
-				for(velocity3 = -14; velocity3 < 0; velocity3+=2) {
-					Yassuo.xPos+=velocity3;
-				}
+				Yassuo.knock(g, velocity3);
+				Yassuo.xPos-=velocity3;
+			}
+			if(velocity3>=0) {
+				knocked1=false;
 			}
 		}
 	}
 	
-	void knockRight(int fighter) {
+	void knockRight(int fighter, Graphics g) {
 		if(fighter == 0) {
 			knocked2=true;
 			if(knocked2 = true) {
-				for(velocity2 = 14; velocity2 > 0; velocity2-=2) {
-					T1.xPos+=velocity2;
-				}
+				T1.knock(g, velocity2);
+				T1.xPos+=velocity2;
+			}
+			if(velocity2>=0) {
+				knocked2=false;
 			}
 		}
 		
 		if(fighter == 1) {
 			knocked3=true;
 			if(knocked3 = true) {
-				for(velocity3 = 14; velocity3 > 0; velocity3-=2) {
-					Yassuo.xPos+=velocity3;
-				}
+				Yassuo.knock(g, velocity3);
+				Yassuo.xPos+=velocity3;
+			}
+			if(velocity3>=0) {
+				knocked3=false;
 			}
 		}
 	}
