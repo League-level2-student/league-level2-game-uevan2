@@ -209,6 +209,7 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 		 if(ifPunch0==true) {
 			 punch("T1", g);
 			 ifPunch0=false;
+			 System.out.println("eeeeee");
 		 }
 		 
 		 if(ifPunch1==true) {
@@ -264,8 +265,16 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 			 whatImage = 4;
 		 }
 		 
-		 if(ifPunch0 = true&&T1.direction==RIGHT) {
+		 if(ifPunch0 == true&&T1.direction==RIGHT) {
 			 whatImage = 5;
+		 }
+		 
+		 if(ifPunch0 == true&&Yassuo.direction==LEFT) {
+			 whatImage1 = 4;
+		 }
+		 
+		 if(ifPunch0 == true&&Yassuo.direction==RIGHT) {
+			 whatImage1 = 5;
 		 }
 		 
 		 
@@ -403,9 +412,11 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 			Yassuo.health=Yassuo.health-200;
 			if(Yassuo.xPos<T1.xPos){
 				knockLeft(1, g);
+				System.out.println("t1left");
 			}
 			else {
 				knockRight(1, g);
+				System.out.println("t1right");
 			}
 		}
 		
@@ -413,9 +424,11 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 			T1.health=T1.health-100;
 			if(T1.xPos<Yassuo.xPos){
 				knockLeft(0, g);
+				System.out.println("YassuoLeft");
 			}
 			else {
 				knockRight(0, g);
+				System.out.println("YassuoRight");
 			}
 		}
 	}
@@ -423,7 +436,7 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 	void knockLeft(int fighter, Graphics g) {
 		if(fighter == 0) {
 			knocked0=true;
-			if(knocked0 = true) {			
+			if(knocked0 == true) {			
 				T1.knock(g, velocity2);
 				T1.xPos-=velocity2;
 			}
@@ -434,7 +447,7 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 		
 		if(fighter == 1) {
 			knocked1=true;
-			if(knocked1 = true) {
+			if(knocked1 == true) {
 				Yassuo.knock(g, velocity3);
 				Yassuo.xPos-=velocity3;
 			}
@@ -447,7 +460,7 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 	void knockRight(int fighter, Graphics g) {
 		if(fighter == 0) {
 			knocked2=true;
-			if(knocked2 = true) {
+			if(knocked2 == true) {
 				T1.knock(g, velocity2);
 				T1.xPos+=velocity2;
 			}
@@ -458,7 +471,7 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 		
 		if(fighter == 1) {
 			knocked3=true;
-			if(knocked3 = true) {
+			if(knocked3 == true) {
 				Yassuo.knock(g, velocity3);
 				Yassuo.xPos+=velocity3;
 			}
