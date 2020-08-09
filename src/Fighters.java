@@ -80,6 +80,15 @@ public class Fighters {
 		draw(g);
 	}
 	
+	void knockLeft(Graphics g, int velocity) {
+		xPos=xPos-velocity;
+		draw(g);
+	}
+	
+	void knockRight(Graphics g, int velocity) {
+		xPos=xPos+velocity;
+		draw(g);
+	}
 
 	
 }
