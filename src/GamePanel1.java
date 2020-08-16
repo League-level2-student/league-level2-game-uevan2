@@ -36,7 +36,7 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
     
     Fighters T1 = new Fighters(200, fWidth, fHeight, 20000, 10);
     
-    Fighters Yassuo = new Fighters(600, fWidth1, fHeight1, 20000, 10);
+    Fighters Yassuo = new Fighters(1000, fWidth1, fHeight1, 20000, 10);
     
     Font titleFont;
     Font normalFont;
@@ -222,7 +222,7 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 				 ifPunch0=false;
 				 velocity3=20;
 			 }
-			 T1.health=T1.health-100;
+			 T1.health=T1.health-200;
 		 }
 		 
 		 /*
@@ -350,12 +350,20 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 			 }
 			 else if(currentState==END) {
 				 currentState=0;
+				 Yassuo.health=20000;
+				 T1.health=20000;
+				 winner=0;
+				 T1.xPos=200;
+				 Yassuo.xPos=1000;
+				 ifPunch1=false;
+				 ifPunch0=false;
+				
 			 }
 		 }
 		 
 		 if (e.getKeyCode()==KeyEvent.VK_SPACE) {
 			 if(currentState==MENU) {
-				 JOptionPane.showMessageDialog(null, "League Fighters is a two player fighting game. \n Each player chooses a fishter at the start to battle with. \n The first person to get their enemies health down to zero wins");
+				 JOptionPane.showMessageDialog(null, "League Fighters is a two player fighting game. \n There are two fighter Tyler1 and Yassuo who fight each other to the death \n The first person to get the enemy fighters health down to zero wins \n Use the up, left and right arrow to move tyler1 and space to punch \n For yassuo use w, a, and d to move and s to punch.");
 			 }
 		 }
 	
@@ -401,7 +409,7 @@ public class GamePanel1 extends JPanel implements KeyListener, ActionListener{
 				 }
 			 }
 			 
-			 if (e.getKeyCode()==KeyEvent.VK_DOWN) {
+			 if (e.getKeyCode()==KeyEvent.VK_S) {
 				 if(checkColision()==true) {
 					 ifPunch0 = true;
 				 }
